@@ -22,7 +22,12 @@
     <%= form.label :content %><br>
     <%= form.text_area :text, class: 'form-control', cols:20, rows:20%>
   </p>
- 
+
+  <p>
+    Add image<br>
+    <%= form.file_field :image%>
+  </p>
+
   <p>
     <%= form.submit %>
   </p>
