@@ -27,6 +27,18 @@ h2 {
   color: #cccccc;
 }
 
+.fill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-width: 1280px;
+    max-height: 720px;
+}
+.fill img {
+    min-width: 100%;
+    min-height: 100%;
+}
 
 
 /* STRUCTURE */
