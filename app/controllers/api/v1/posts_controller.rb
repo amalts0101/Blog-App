@@ -31,24 +31,30 @@ module Api
         end
       end
 
-      # rubocop:disable Metrics/MethodLength
       def update
         @post = Post.find_by(id: params[:id])
         if @post
           if @post.update(post_params)
-            render status: :ok, json: {
-              message: 'Successfully Updated the Post'
-            }
+            render_success
           else
-            render status: :bad_request, json: {
-              message: @post.errors.full_messages
-            }
+            render_failure
           end
         else
           render status: :not_found, json: { message: 'No post Found' }
         end
       end
-      # rubocop:enable Metrics/MethodLength
+
+      def render_success
+        render status: :ok, json: {
+          message: 'Successfully Updated the Post'
+        }
+      end
+
+      def render_failure
+        render status: :bad_request, json: {
+          message: @post.errors.full_messages
+        }
+      end
 
       def destroy
         @post = Post.find_by(id: params[:id])
