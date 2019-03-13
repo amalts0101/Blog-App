@@ -1,37 +1,33 @@
-<div>
-  <div class="container">
+<div class="container">
     <div class="row">
-      <div class="col-md-8">
-<table>
-  <h1>Blog Posts</h1>
-  <% @posts.each do |post| %>
-  <tr>
-  <div class="card mb-4">
-    <h3><%= post.title %></h3>
-    <p class = "lead">by
-    <%= post.user.email %> 
-    </p>
-    <hr>
-    <%= post.created_at.strftime("Posted on %m/%d/%Y at %I:%M%p")%> 
-    <hr>
-    <%= image_tag('default-image.jpg') %>
-    <p align="justify"><%= post.text %></p>
-    <%= link_to 'Show', post_path(post),class: 'btn btn-primary' %>
-    <%if user_signed_in?%> 
-      <%if post.user_id == current_user.id%>
-      <%= link_to 'Edit', edit_post_path(post),class: 'btn btn-warning' %>
-      <%= link_to 'Delete', post_path(post),
+      <div class="col-md-12">
+        <h1>Blog Posts</h1>
+        <% @posts.each do |post| %>
+          <div class="card mb-4">
+          <h3><%= post.title %></h3>
+          <p class = "lead">by
+          <%= post.user.email %>
+          </p>
+          <hr>
+          <%= post.created_at.strftime("Posted on %m/%d/%Y at %I:%M%p")%>
+          <hr>
+          <div class='fill'>
+            <%= image_tag post.image.url %>
+          </div>
+          <p align="justify"><%= post.text %></p>
+          <%= link_to 'Show', post_path(post),class: 'btn btn-primary' %>
+          <%if user_signed_in?%>
+            <%if post.user_id == current_user.id%>
+              <%= link_to 'Edit', edit_post_path(post),class: 'btn btn-warning' %>
+              <%= link_to 'Delete', post_path(post),
               method: :delete,
               data: { confirm: 'Are you sure you want to delete?'},class: 'btn btn-danger' %></td>
-      <%end%>
-    <%end%>
-  </div>
-  </tr>
-  <%end%>
-  <br>
-</table>
+            <%end%>
+          <%end%>
+          </div>
+        <%end%>
+<br>
 <%= paginate @posts, class: 'pagination ' %>
-</div>
 </div>
 </div>
 </div>
