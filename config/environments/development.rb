@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength:
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take
+  # precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -27,7 +31,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
-  # Store uploaded files on the local file system (see config/storage.yml for options)
+  # Store uploaded files on the local
+  # file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
@@ -72,3 +77,4 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 end
+# rubocop:enable Metrics/BlockLength:

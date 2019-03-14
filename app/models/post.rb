@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Post.rb file
 class Post < ApplicationRecord
   attr_accessor :image_width, :image_height
@@ -9,7 +11,11 @@ class Post < ApplicationRecord
   validate :check_dimensions, on: :create
 
   def check_dimensions
-    if !image_cache.nil? && (image.width < 1280 || image.height < 720)
+    return true if image.blank?
+
+    image_dim = (image.width < 1280 || image.height < 720)
+    return unless
+    if !image_cache.nil? && image_dim
       errors.add :image, 'Dimension should be atleast 1280x720.'
     end
   end

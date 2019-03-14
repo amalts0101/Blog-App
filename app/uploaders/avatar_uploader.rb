@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# class avatar
 class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -14,11 +17,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url(*args)
-    # For Rails 3.1+ asset pipeline compatibility:
-    # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-    
-    "/assets/default-image.jpg"
+  def default_url(*_args)
+    # For Rails 3.1+ asset pipeline compatibility
+    '/assets/default-image.jpg'
   end
 
   # Process files as they are uploaded:
@@ -36,16 +37,17 @@ class AvatarUploader < CarrierWave::Uploader::Base
   attr_reader :width, :height
   before :cache, :capture_size
   def capture_size(file)
-    if version_name.blank? # Only do this once, to the original version
-      if file.path.nil? # file sometimes is in memory
-        img = ::MiniMagick::Image::read(file.file)
-        @width = img[:width]
-        @height = img[:height]
-      else
-        @width, @height = `identify -format "%wx %h" #{file.path}`.split(/x/).map{|dim| dim.to_i }
-      end
+    return if version_name.present?
+
+    if file.path.nil?
+      img = MiniMagick.Image.read(file.file)
+      @width = img[:width]
+      @height = img[:height]
+    else
+      a = `identify -format "%wx %h" #{file.path}`
+      @width, @height = a.split(/x/).map(&:to_i)
     end
-end
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
@@ -54,7 +56,8 @@ end
   # end
 
   # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  # Avoid using model.id or version_name here,
+  # see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
   # end

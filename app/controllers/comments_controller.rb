@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Comments controller file
 class CommentsController < ApplicationController
   def create
