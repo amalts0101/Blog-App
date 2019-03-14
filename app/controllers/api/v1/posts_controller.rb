@@ -71,9 +71,9 @@ module Api
         params.require(:post).permit(
           :title,
           :text,
-          :image
+          :image,
+          :user_id
         )
-              .merge(user_id: User.all.ids.sample)
       end
     end
   end
