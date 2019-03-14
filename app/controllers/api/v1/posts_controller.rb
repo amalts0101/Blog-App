@@ -73,7 +73,7 @@ module Api
           :text,
           :image
         )
-              .merge(user_id: User.first.id)
+              .merge(user_id: User.all.ids.sample)
       end
     end
   end
