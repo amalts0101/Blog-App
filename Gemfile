@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
+gem 'newrelic_rpm'
 gem 'overcommit', require: false
 gem 'pg'
 gem 'puma', '~> 3.11'
